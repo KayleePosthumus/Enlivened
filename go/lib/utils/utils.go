@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"database/sql"
 	"encoding/json"
 	"lib/logger"
 	"net/http"
@@ -127,4 +128,16 @@ func clientIP(request *http.Request) string {
 	}
 
 	return request.RemoteAddr
+}
+
+// MapString
+func MapString(rows *sql.Rows) (interface{}, error) {
+	var s string
+	err := rows.Scan(
+		&s,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return s, nil
 }
