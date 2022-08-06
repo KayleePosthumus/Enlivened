@@ -1,6 +1,7 @@
 package main
 
 import (
+	"api/db"
 	"api/endpoints"
 	"lib/logger"
 	"net/http"
@@ -10,12 +11,19 @@ import (
 )
 
 func main() {
+	// Create Database connection pool
+	err := db.RegisterAccess()
+	if err != nil {
+		logger.Error.Fatal(err)
+		os.Exit(-1)
+	}
+
 	// Route endpoints
 	router := mux.NewRouter().StrictSlash(true)
 
 	// User endpoints
 	userRouter := router.PathPrefix("/user").Subrouter()
-	err := endpoints.UserHandlers(userRouter)
+	err = endpoints.UserHandlers(userRouter)
 	if err != nil {
 		logger.Error.Fatal(err)
 		os.Exit(-1)
