@@ -111,3 +111,111 @@ func mapEventImage(rows *sql.Rows) (interface{}, error) {
 	}
 	return eventImage, nil
 }
+
+
+///////////////////////
+// Event
+
+//StoreIdentifier stores an identifier
+func (access *EventDA) StoreIdentifier(identifier *EventIdentifier) (string, error) {
+	results, err := access.access.Query(
+		`SELECT * FROM "event".identifier_store($1, $2, $3, $4, $5, $6, $7, $8)`, utils.MapString,
+		identifier.Id, identifier.Organiser, identifier.Location, identifier.Category, identifier.League, identifier.Capacity, identifier.Description, identifier.Picture)
+	if err != nil {
+		return "", err
+	}
+	for r, _ := range results {
+		if value, ok := results[r].(string); ok {
+			return value, nil
+		}
+	}
+	return "", nil
+}
+
+//FindIdentifier finds an identifier
+func (access *EventDA) FindIdentifier(identifier *EventIdentifier) (EventIdentifiers, error) {
+	results, err := access.access.Query(
+		`SELECT * FROM "event".identifier_find($1, $2, $3, $4, $5, $6, $7, $8)`, utils.MapString,
+		identifier.Id, identifier.Organiser, identifier.Location, identifier.Category, identifier.League, identifier.Capacity, identifier.Description, identifier.Picture)
+	if err != nil {
+		return nil, err
+	}
+	tmp := make([]*EventIdentifier, 0)
+	for r, _ := range results {
+		if value, ok := results[r].(EventIdentifier); ok {
+			tmp = append(tmp, &value)
+		}
+	}
+	return tmp, nil
+}
+
+///////////////////////
+// Event-Images
+
+// StoreIdentifier stores an image
+func (access *EventDA) StoreIdentifier(identifier *ImageIdentifier) error {
+	results, err := access.access.Query(
+		`SELECT * FROM "event".images_store($1, $2, $3, $4, $5, $6, $7, $8)`, utils.MapString,
+		identifier.Id, identifier.Organiser, identifier.Location, identifier.Category, identifier.League, identifier.Capacity, identifier.Description, identifier.Picture)
+	if err != nil {
+		return "", err
+	}
+	for r, _ := range results {
+		if value, ok := results[r].(string); ok {
+			return value, nil
+		}
+	}
+	return "", nil
+}
+
+//FindIdentifier finds an image
+func (access *EventDA) FindImage(image *EventImage) (EventImage, error) {
+	results, err := access.access.Query(
+		`SELECT * FROM "images".images_find($1, $2, $3, $4)`, utils.MapString,
+		image.Id, image.Event, image.UserId, image.Picture)
+	if err != nil {
+		return nil, err
+	}
+	tmp := make([]*EventImage, 0)
+	for r, _ := range results {
+		if value, ok := results[r].(EventImage); ok {
+			tmp = append(tmp, &value)
+		}
+	}
+	return tmp, nil
+}
+
+///////////////////////
+// Event-Users
+
+_event_id uuid, -- NOT NULLABLE
+	_user_id uuid
+
+// StoreEventUser stores an image
+func (access *EventDA) StoreEventUser(eventUser *EventUser) error {
+	results, err := access.access.Query(
+		`SELECT * FROM "event".user_store($1, $2)`, utils.MapString,
+		eventUser.EventId, eventUser.UserId)
+	if err != nil {
+		return false
+	}
+	else
+		return true
+}
+
+//FindIdentifier finds an identifier
+func (access *EventDA) FindEventUser(user *EventUser) (EventUser, error) {
+	results, err := access.access.Query(
+		`SELECT * FROM "event.user".user_find($1, $2, $3, $4)`, utils.MapString,
+		user.EventId, user.UserId)
+	if err != nil {
+		return nil, err
+	}
+	tmp := make([]*EventUser, 0)
+	for r, _ := range results {
+		if value, ok := results[r].(EventUser); ok {
+			tmp = append(tmp, &value)
+		}
+	}
+	return tmp, nil
+}
