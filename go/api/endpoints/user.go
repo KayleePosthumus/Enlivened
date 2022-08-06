@@ -32,6 +32,7 @@ type RegisterUserStruct struct {
 func UserHandlers(router *mux.Router) error {
 	router.HandleFunc("/register", UserRegister).Methods("POST")
 	router.HandleFunc("/find", FindUser).Methods("POST")
+	router.HandleFunc("/login", Login).Methods("POST")
 
 	return nil
 }
@@ -149,4 +150,62 @@ func FindUser(writer http.ResponseWriter, request *http.Request) {
 	logger.Info.Println("Users Succesfully Requested")
 
 	utils.JSONResponse(writer, request, userIdentifiers)
+}
+
+// Login gets images for an event
+func Login(writer http.ResponseWriter, request *http.Request) {
+	logger.Access.Println("Login endpoint hit")
+
+	// Unmarshal Event Image
+	var userCredential data.UserCredential
+	err := utils.UnmarshalJSON(writer, request, &userCredential)
+	if err != nil {
+		fmt.Println(err)
+		utils.BadRequest(writer, request, "invalid_request")
+		return
+	}
+
+	//temp := "local." + *userCredential.Identifier
+	//userCredential.Identifier = &temp
+
+	// Create a database connection
+	access, err := db.Open()
+	if err != nil {
+		utils.InternalServerError(writer, request, err)
+		return
+	}
+	defer access.Close()
+
+	da := data.NewUserDA(access)
+	userCredent, err := da.FindCredential(&userCredential)
+	if err != nil {
+		utils.InternalServerError(writer, request, err)
+		return
+	}
+
+	if len(userCredent) == 0 {
+		utils.BadRequest(writer, request, "incorrect_credentials")
+		return
+	}
+
+	temp := *userCredent[0].Identifier
+
+	logger.Access.Printf("DEBUG:::::::: %v", temp)
+
+	users, err := da.FindIdentifier(&data.UserIdentifier{Email: &temp})
+	if err != nil {
+		utils.InternalServerError(writer, request, err)
+		return
+	}
+
+	// Commit transaction
+	err = access.Commit()
+	if err != nil {
+		utils.InternalServerError(writer, request, err)
+		return
+	}
+
+	logger.Info.Println("Users Succesfully logged in")
+
+	utils.JSONResponse(writer, request, users)
 }
