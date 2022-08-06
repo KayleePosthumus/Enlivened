@@ -7,9 +7,10 @@ CREATE TYPE event.league AS ENUM ('WOMEN', 'MIXED');
 CREATE TABLE IF NOT EXISTS event.identifier (
     id uuid DEFAULT uuid_generate_v4(),
     organiser uuid REFERENCES "user".identifier(id) ON DELETE SET NULL,
-    location POINT,
-    category event.category NOT NULL DEFAULT 'EDUCATION',
-    league event.league NOT NULL DEFAULT 'WOMEN',
+    longitude TEXT,
+    latitude TEXT,
+    category event.category DEFAULT 'EDUCATION',
+    league event.league DEFAULT 'WOMEN',
     description TEXT,
     capacity INT,
     picture BYTEA,

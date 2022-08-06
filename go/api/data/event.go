@@ -3,6 +3,7 @@ package data
 import (
 	"api/db"
 	"database/sql"
+	"lib/utils"
 	"time"
 )
 
@@ -13,7 +14,8 @@ import (
 type EventIdentifier struct {
 	Id          *string    `json:"id,omitempty"`
 	Organiser   *string    `json:"organiser,omitempty"`
-	Location    *string    `json:"location,omitempty"`
+	Longitude   *string    `json:"longitude,omitempty"`
+	Latitude    *string    `json:"latitude,omitempty"`
 	Category    *string    `json:"category,omitempty"`
 	League      *string    `json:"league,omitempty"`
 	Description *string    `json:"description,omitempty"`
@@ -24,6 +26,14 @@ type EventIdentifier struct {
 
 // EventIdentifiers represent a splice of EventIdentifier
 type EventIdentifiers []*EventIdentifier
+
+//FindHead returns the first User
+func (events EventIdentifiers) FindHead() *EventIdentifier {
+	if len(events) == 0 {
+		return nil
+	}
+	return events[0]
+}
 
 // EventUser identifies a User Event via common attributes
 type EventUser struct {
@@ -71,7 +81,8 @@ func mapEventIdentifier(rows *sql.Rows) (interface{}, error) {
 	err := rows.Scan(
 		&eventIdentifier.Id,
 		&eventIdentifier.Organiser,
-		&eventIdentifier.Location,
+		&eventIdentifier.Longitude,
+		&eventIdentifier.Latitude,
 		&eventIdentifier.Category,
 		&eventIdentifier.League,
 		&eventIdentifier.Description,
@@ -112,15 +123,14 @@ func mapEventImage(rows *sql.Rows) (interface{}, error) {
 	return eventImage, nil
 }
 
-
 ///////////////////////
 // Event
 
 //StoreIdentifier stores an identifier
 func (access *EventDA) StoreIdentifier(identifier *EventIdentifier) (string, error) {
 	results, err := access.access.Query(
-		`SELECT * FROM "event".identifier_store($1, $2, $3, $4, $5, $6, $7, $8)`, utils.MapString,
-		identifier.Id, identifier.Organiser, identifier.Location, identifier.Category, identifier.League, identifier.Capacity, identifier.Description, identifier.Picture)
+		`SELECT * FROM event.identifier_store($1, $2, $3, $4, $5, $6, $7, $8, $9)`, utils.MapString,
+		identifier.Id, identifier.Organiser, identifier.Longitude, identifier.Latitude, identifier.Category, identifier.League, identifier.Capacity, identifier.Description, identifier.Picture)
 	if err != nil {
 		return "", err
 	}
@@ -135,8 +145,8 @@ func (access *EventDA) StoreIdentifier(identifier *EventIdentifier) (string, err
 //FindIdentifier finds an identifier
 func (access *EventDA) FindIdentifier(identifier *EventIdentifier) (EventIdentifiers, error) {
 	results, err := access.access.Query(
-		`SELECT * FROM "event".identifier_find($1, $2, $3, $4, $5, $6, $7, $8)`, utils.MapString,
-		identifier.Id, identifier.Organiser, identifier.Location, identifier.Category, identifier.League, identifier.Capacity, identifier.Description, identifier.Picture)
+		`SELECT * FROM event.identifier_find($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`, mapEventIdentifier,
+		identifier.Id, identifier.Organiser, identifier.Longitude, identifier.Latitude, identifier.Category, identifier.League, identifier.Capacity, identifier.Description, identifier.Picture, identifier.DateCreated)
 	if err != nil {
 		return nil, err
 	}
@@ -149,30 +159,36 @@ func (access *EventDA) FindIdentifier(identifier *EventIdentifier) (EventIdentif
 	return tmp, nil
 }
 
+//DeleteIdentifier removes an identifier
+func (access *EventDA) DeleteIdentifier(identifier *EventIdentifier) error {
+	_, err := access.access.Query(
+		`SELECT * FROM event.identifier_remove($1)`, nil,
+		identifier.Id)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 ///////////////////////
 // Event-Images
 
 // StoreIdentifier stores an image
-func (access *EventDA) StoreIdentifier(identifier *ImageIdentifier) error {
-	results, err := access.access.Query(
-		`SELECT * FROM "event".images_store($1, $2, $3, $4, $5, $6, $7, $8)`, utils.MapString,
-		identifier.Id, identifier.Organiser, identifier.Location, identifier.Category, identifier.League, identifier.Capacity, identifier.Description, identifier.Picture)
+func (access *EventDA) StoreImage(identifier *EventImage) error {
+	_, err := access.access.Query(
+		`SELECT * FROM event.images_store($1, $2, $3, $4)`, nil,
+		identifier.Id, identifier.EventId, identifier.UserId, identifier.Picture)
 	if err != nil {
-		return "", err
+		return err
 	}
-	for r, _ := range results {
-		if value, ok := results[r].(string); ok {
-			return value, nil
-		}
-	}
-	return "", nil
+	return nil
 }
 
 //FindIdentifier finds an image
-func (access *EventDA) FindImage(image *EventImage) (EventImage, error) {
+func (access *EventDA) FindImage(image *EventImage) (EventImages, error) {
 	results, err := access.access.Query(
-		`SELECT * FROM "images".images_find($1, $2, $3, $4)`, utils.MapString,
-		image.Id, image.Event, image.UserId, image.Picture)
+		`SELECT * FROM event.images_find($1, $2, $3, $4, $5)`, mapEventImage,
+		image.Id, image.EventId, image.UserId, image.Picture, image.DateAdded)
 	if err != nil {
 		return nil, err
 	}
@@ -185,28 +201,35 @@ func (access *EventDA) FindImage(image *EventImage) (EventImage, error) {
 	return tmp, nil
 }
 
+//DeleteImage removes an image from an event
+func (access *EventDA) DeleteImage(identifier *EventImage) error {
+	_, err := access.access.Query(
+		`SELECT * FROM event.image_remove($1)`, nil,
+		identifier.Id)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 ///////////////////////
 // Event-Users
 
-_event_id uuid, -- NOT NULLABLE
-	_user_id uuid
-
 // StoreEventUser stores an image
 func (access *EventDA) StoreEventUser(eventUser *EventUser) error {
-	results, err := access.access.Query(
-		`SELECT * FROM "event".user_store($1, $2)`, utils.MapString,
+	_, err := access.access.Query(
+		`SELECT * FROM event.user_store($1, $2)`, nil,
 		eventUser.EventId, eventUser.UserId)
 	if err != nil {
-		return false
+		return err
 	}
-	else
-		return true
+	return nil
 }
 
 //FindIdentifier finds an identifier
-func (access *EventDA) FindEventUser(user *EventUser) (EventUser, error) {
+func (access *EventDA) FindEventUser(user *EventUser) (EventUsers, error) {
 	results, err := access.access.Query(
-		`SELECT * FROM "event.user".user_find($1, $2, $3, $4)`, utils.MapString,
+		`SELECT * FROM event.user_find($1, $2)`, mapEventUser,
 		user.EventId, user.UserId)
 	if err != nil {
 		return nil, err
@@ -218,4 +241,15 @@ func (access *EventDA) FindEventUser(user *EventUser) (EventUser, error) {
 		}
 	}
 	return tmp, nil
+}
+
+//DeleteImage removes an image from an event
+func (access *EventDA) DeleteEventUser(identifier *EventUser) error {
+	_, err := access.access.Query(
+		`SELECT * FROM event.user_remove($1, $2)`, nil,
+		identifier.EventId, identifier.UserId)
+	if err != nil {
+		return err
+	}
+	return nil
 }

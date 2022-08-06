@@ -19,6 +19,7 @@ type UserIdentifier struct {
 	Email       *string    `json:"email,omitempty"`
 	Picture     *[]byte    `json:"picture,omitempty"`
 	Verified    *bool      `json:"verified,omitempty"`
+	Female      *bool      `json:"female,omitempty"`
 	DateCreated *time.Time `json:"date_created,omitempty"`
 }
 
@@ -75,6 +76,7 @@ func mapUserIdentifier(rows *sql.Rows) (interface{}, error) {
 		&userIdentifier.Email,
 		&userIdentifier.Picture,
 		&userIdentifier.Verified,
+		&userIdentifier.Female,
 		&userIdentifier.DateCreated,
 	)
 	if err != nil {
@@ -107,8 +109,8 @@ func mapUserCredential(rows *sql.Rows) (interface{}, error) {
 //StoreIdentifier stores an identifier
 func (access *UserDA) StoreIdentifier(identifier *UserIdentifier) (string, error) {
 	results, err := access.access.Query(
-		`SELECT * FROM "user".identifier_store($1, $2, $3, $4, $5, $6, $7)`, utils.MapString,
-		identifier.Id, identifier.Identifier, identifier.FirstName, identifier.LastName, identifier.Email, identifier.Picture, identifier.Verified)
+		`SELECT * FROM "user".identifier_store($1, $2, $3, $4, $5, $6, $7, $8)`, utils.MapString,
+		identifier.Id, identifier.Identifier, identifier.FirstName, identifier.LastName, identifier.Email, identifier.Picture, identifier.Verified, identifier.Female)
 	if err != nil {
 		return "", err
 	}
@@ -123,8 +125,8 @@ func (access *UserDA) StoreIdentifier(identifier *UserIdentifier) (string, error
 //FindIdentifier finds an identifier
 func (access *UserDA) FindIdentifier(identifier *UserIdentifier) (UserIdentifiers, error) {
 	results, err := access.access.Query(
-		`SELECT * FROM "user".identifier_find($1, $2, $3, $4, $5, $6, $7, $8)`, mapUserIdentifier,
-		identifier.Id, identifier.Identifier, identifier.FirstName, identifier.LastName, identifier.Email, identifier.Picture, identifier.Verified, identifier.DateCreated)
+		`SELECT * FROM "user".identifier_find($1, $2, $3, $4, $5, $6, $7, $8, $9)`, mapUserIdentifier,
+		identifier.Id, identifier.Identifier, identifier.FirstName, identifier.LastName, identifier.Email, identifier.Picture, identifier.Verified, identifier.DateCreated, identifier.Female)
 	if err != nil {
 		return nil, err
 	}

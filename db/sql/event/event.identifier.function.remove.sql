@@ -4,7 +4,8 @@ CREATE OR REPLACE FUNCTION event.identifier_remove(
 RETURNS TABLE (
     id uuid,
     organiser uuid,
-    location POINT,
+    longitude TEXT,
+    latitude TEXT,
     category event.category,
     league event.league,
     description TEXT,

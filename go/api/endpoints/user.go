@@ -3,6 +3,7 @@ package endpoints
 import (
 	"api/data"
 	"api/db"
+	"fmt"
 	"lib/logger"
 	"lib/utils"
 	"net/http"
@@ -29,8 +30,9 @@ type RegisterUserStruct struct {
 
 //UserHandlers maintains user endpoints
 func UserHandlers(router *mux.Router) error {
-	router.HandleFunc("/test", TEST).Methods("POST") // TODO [KP]: REMOVE THIS
 	router.HandleFunc("/register", UserRegister).Methods("POST")
+	router.HandleFunc("/find", FindUser).Methods("POST")
+
 	return nil
 }
 
@@ -107,4 +109,44 @@ func UserRegister(writer http.ResponseWriter, request *http.Request) {
 	}
 	logger.Info.Println("User registered")
 	utils.JSONResponse(writer, request, id)
+}
+
+// FindUser gets images for an event
+func FindUser(writer http.ResponseWriter, request *http.Request) {
+	logger.Access.Println("FindUser endpoint hit")
+
+	// Unmarshal Event Image
+	var userIdentifier data.UserIdentifier
+	err := utils.UnmarshalJSON(writer, request, &userIdentifier)
+	if err != nil {
+		fmt.Println(err)
+		utils.BadRequest(writer, request, "invalid_request")
+		return
+	}
+
+	// Create a database connection
+	access, err := db.Open()
+	if err != nil {
+		utils.InternalServerError(writer, request, err)
+		return
+	}
+	defer access.Close()
+
+	da := data.NewUserDA(access)
+	userIdentifiers, err := da.FindIdentifier(&userIdentifier)
+	if err != nil {
+		utils.InternalServerError(writer, request, err)
+		return
+	}
+
+	// Commit transaction
+	err = access.Commit()
+	if err != nil {
+		utils.InternalServerError(writer, request, err)
+		return
+	}
+
+	logger.Info.Println("Users Succesfully Requested")
+
+	utils.JSONResponse(writer, request, userIdentifiers)
 }

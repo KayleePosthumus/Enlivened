@@ -5,7 +5,8 @@ CREATE OR REPLACE FUNCTION "user".identifier_store(
 	_last_name VARCHAR(256),
 	_email VARCHAR(256),
 	_picture BYTEA,
-    _verified BOOLEAN DEFAULT NULL
+    _verified BOOLEAN DEFAULT NULL,
+    _female BOOLEAN DEFAULT NULL
 )
 RETURNS uuid AS 
 $$
@@ -18,12 +19,13 @@ BEGIN
             last_name = _last_name,
             email = _email,
             picture = _picture,
-            verified = _verified
+            verified = _verified,
+            female = _female
         WHERE identifier = _identifier
         RETURNING identifier.id INTO __id;
     ELSE
-        INSERT INTO "user".identifier (id, identifier, first_name, last_name, email, picture)
-        VALUES (COALESCE(_id, uuid_generate_v4()), _identifier, _first_name, _last_name, _email, _picture)
+        INSERT INTO "user".identifier (id, identifier, first_name, last_name, email, picture, female)
+        VALUES (COALESCE(_id, uuid_generate_v4()), _identifier, _first_name, _last_name, _email, _picture, _female)
         RETURNING identifier.id INTO __id;
     END IF;
     RETURN __id;

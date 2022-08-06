@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS "user".identifier (
     email VARCHAR(256) CHECK(email <> ''),
     picture BYTEA CHECK(picture <> ''),
     verified BOOLEAN DEFAULT FALSE,
+    female BOOLEAN DEFAULT FALSE,
     date_created TIMESTAMP WITHOUT TIME ZONE DEFAULT(now() AT TIME ZONE 'uct'),
 	
     PRIMARY KEY (id)

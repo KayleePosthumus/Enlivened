@@ -15,11 +15,11 @@ BEGIN
             user_id = _user_id,
             picture = _picture
         WHERE id = _id
-		RETURNING identifier.id INTO __id;
+		RETURNING images.id INTO __id;
     ELSE
     	INSERT INTO event.images(id, event_id, user_id, picture)
     	VALUES (COALESCE(_id, uuid_generate_v4()), _event_id, _user_id, _picture)
-		RETURNING identifier.id INTO __id;
+		RETURNING images.id INTO __id;
     END IF;
 	RETURN __id;
 END

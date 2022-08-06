@@ -9,6 +9,7 @@ RETURNS TABLE (
 	email VARCHAR(256),
 	picture BYTEA,
     verified BOOLEAN,
+    female BOOLEAN,
     date_created TIMESTAMP
 ) AS 
 $$

@@ -29,6 +29,14 @@ func main() {
 		os.Exit(-1)
 	}
 
+	// Event endpoints
+	eventRouter := router.PathPrefix("/event").Subrouter()
+	err = endpoints.EventHandlers(eventRouter)
+	if err != nil {
+		logger.Error.Fatal(err)
+		os.Exit(-1)
+	}
+
 	// Start API on port 8080 in its docker container
 	logger.Info.Println("Starting API on 8080")
 	logger.Error.Fatal(http.ListenAndServe(":8080", router))

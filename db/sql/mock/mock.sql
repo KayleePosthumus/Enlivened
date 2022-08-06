@@ -7,7 +7,9 @@ SELECT "user".identifier_store(
 	'Aaaaaa', 
 	'Aaaaaa', 
 	'a@a.com', 
-	'/picture'
+	'/picture',
+	false,
+	true
 );
 
 SELECT "user".credential_store(
@@ -23,7 +25,9 @@ SELECT "user".identifier_store(
 	'Bbbbb', 
 	'Bbbbb', 
 	'b@b.com', 
-	'/picture'
+	'/picture',
+	true,
+	true
 );
 
 SELECT "user".credential_store(
@@ -38,7 +42,8 @@ SELECT "user".credential_store(
 SELECT event.identifier_store(
 	'11110000-0000-0000-0000-000000000000'::uuid,
 	'00000000-0000-0000-0000-000000000000'::uuid, -- User a
-    point(-87.6, 41.9),
+    '11',
+    '11',
 	'SUPPORT'::event.category, 
 	'WOMEN'::event.league, 
 	'description', 
