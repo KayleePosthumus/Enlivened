@@ -1,0 +1,40 @@
+version: '3.9'
+services:
+
+  tampoff-db:
+    image: postgres:14
+    hostname: tampoff-db
+    container_name: tampoff-db
+    env_file: .env
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "admin"
+      POSTGRES_DB: "tampoff"
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db/postgres-data:/var/lib/postgresql/data
+      - ./db/sql:/docker-entrypoint-initdb.d
+    networks:
+      - tampoff-network
+
+  tampoff-api:
+    build:
+      context: ./go
+      dockerfile: api/Dockerfile
+    container_name: tampoff-api
+    hostname: tampoff-api
+    env_file: .env
+    restart: unless-stopped
+    volumes:
+      - ./go/api/config.json:/run/secrets/config.json
+    ports:
+      - 8100:8080
+    networks:
+      - tampoff-network
+    depends_on:
+      - tampoff-db
+
+networks:
+    tampoff-network:
