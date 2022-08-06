@@ -4,8 +4,8 @@ CREATE OR REPLACE FUNCTION "user".identifier_store(
 	_first_name VARCHAR(256),
 	_last_name VARCHAR(256),
 	_email VARCHAR(256),
-	_picture VARCHAR(256),
-    _verified BOOLEAN
+	_picture BYTEA,
+    _verified BOOLEAN DEFAULT NULL
 )
 RETURNS uuid AS 
 $$

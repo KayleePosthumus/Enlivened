@@ -20,6 +20,23 @@ do
   psql "$CONFIG" -f "$file"
 done
 
+######### event
+for file in ${DIR}/event/*.schema.*sql
+do
+  psql "$CONFIG" -f "$file"
+done
+
+for file in ${DIR}/event/*.function.*sql
+do
+  psql "$CONFIG" -f "$file"
+done
+
+######### common
+for file in ${DIR}/common/*.sql
+do
+  psql "$CONFIG" -f "$file"
+done
+
 ######### mock
 for file in ${DIR}/mock/*.sql
 do

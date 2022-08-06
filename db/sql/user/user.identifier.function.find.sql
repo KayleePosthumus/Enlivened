@@ -4,8 +4,8 @@ CREATE OR REPLACE FUNCTION "user".identifier_find(
     _first_name VARCHAR(256) DEFAULT NULL,
     _last_name VARCHAR(256) DEFAULT NULL,
     _email VARCHAR(256) DEFAULT NULL,
-    _picture VARCHAR(256) DEFAULT NULL,
-    _verified BOOELAN DEFAULT NULL
+    _picture BYTEA DEFAULT NULL,
+    _verified BOOLEAN DEFAULT NULL
 )
 RETURNS TABLE (
     id uuid,
@@ -13,8 +13,8 @@ RETURNS TABLE (
 	first_name VARCHAR(256),
 	last_name VARCHAR(256),
 	email VARCHAR(256),
-	picture VARCHAR(256),
-    verified BOOELAN,
+	picture BYTEA,
+    verified BOOLEAN,
     date_created TIMESTAMP
 ) AS 
 $$

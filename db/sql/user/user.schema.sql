@@ -1,5 +1,4 @@
 CREATE SCHEMA IF NOT EXISTS "user";
-CREATE SCHEMA IF NOT EXISTS parking;
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
@@ -9,7 +8,7 @@ CREATE TABLE IF NOT EXISTS "user".identifier (
     first_name VARCHAR(256) CHECK(first_name <> ''),
     last_name VARCHAR(256) CHECK(last_name <> ''),
     email VARCHAR(256) CHECK(email <> ''),
-    picture VARCHAR(256) CHECK(picture <> ''),
+    picture BYTEA CHECK(picture <> ''),
     verified BOOLEAN DEFAULT FALSE,
     date_created TIMESTAMP WITHOUT TIME ZONE DEFAULT(now() AT TIME ZONE 'uct'),
 	
