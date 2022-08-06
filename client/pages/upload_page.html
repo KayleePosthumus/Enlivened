@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<meta charset="UTF-8">
+<title>Upload Image</title>
+<link rel="stylesheet" href="../css/bootstrap-5.2.0-dist/css/bootstrap.min.css">
+<script src="../css/bootstrap-5.2.0-dist/js/bootstrap.min.js"></script>
+
+
+    <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="../img/enlivened-dark.svg" alt="" width="100">
+                </a>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Settings</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <br>
+    <!-- For demo purpose -->
+<div class="card text-center">
+    <div class="card-header">
+      Add new post
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Upload Images</h5>
+      <input id="upload" type="file" onchange="readURL(this);" class="form-control border-0">
+      <br>
+      <div class="input-group-append">
+        <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+    </div>   
+  </div>
+
+
