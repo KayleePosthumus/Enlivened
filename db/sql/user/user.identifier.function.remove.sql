@@ -8,6 +8,7 @@ RETURNS TABLE (
 	last_name VARCHAR(256),
 	email VARCHAR(256),
 	picture VARCHAR(256),
+    verified BOOLEAN,
     date_created TIMESTAMP
 ) AS 
 $$

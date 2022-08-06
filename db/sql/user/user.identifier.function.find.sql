@@ -4,7 +4,8 @@ CREATE OR REPLACE FUNCTION "user".identifier_find(
     _first_name VARCHAR(256) DEFAULT NULL,
     _last_name VARCHAR(256) DEFAULT NULL,
     _email VARCHAR(256) DEFAULT NULL,
-    _picture VARCHAR(256) DEFAULT NULL
+    _picture VARCHAR(256) DEFAULT NULL,
+    _verified BOOELAN DEFAULT NULL
 )
 RETURNS TABLE (
     id uuid,
@@ -13,12 +14,13 @@ RETURNS TABLE (
 	last_name VARCHAR(256),
 	email VARCHAR(256),
 	picture VARCHAR(256),
+    verified BOOELAN,
     date_created TIMESTAMP
 ) AS 
 $$
 BEGIN
     RETURN QUERY
-    SELECT i.id, i.identifier, i.first_name, i.last_name, i.email, i.picture, i.date_created
+    SELECT i.id, i.identifier, i.first_name, i.last_name, i.email, i.picture, i.verified, i.date_created
     FROM "user".identifier as i
     WHERE (_id IS NULL OR i.id = _id)
     AND (_identifier IS NULL OR i.identifier = _identifier)
@@ -26,6 +28,7 @@ BEGIN
     AND (_last_name IS NULL OR i.last_name = _last_name)
     AND (_email IS NULL OR i.email = _email)
     AND (_picture IS NULL OR i.picture = _picture)
+    AND (_verified IS NULL OR i.verified = _verified)
     AND (_date_created IS NULL OR i.date_created >= _date_created);
 END
 $$ LANGUAGE plpgsql;

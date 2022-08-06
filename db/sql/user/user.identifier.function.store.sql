@@ -4,7 +4,8 @@ CREATE OR REPLACE FUNCTION "user".identifier_store(
 	_first_name VARCHAR(256),
 	_last_name VARCHAR(256),
 	_email VARCHAR(256),
-	_picture VARCHAR(256)
+	_picture VARCHAR(256),
+    _verified BOOLEAN
 )
 RETURNS uuid AS 
 $$
@@ -16,7 +17,8 @@ BEGIN
         SET first_name = _first_name,
             last_name = _last_name,
             email = _email,
-            picture = _picture
+            picture = _picture,
+            verified = _verified
         WHERE identifier = _identifier
         RETURNING identifier.id INTO __id;
     ELSE
