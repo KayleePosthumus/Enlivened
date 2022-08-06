@@ -6,9 +6,7 @@ RETURNS TABLE (
 	secret VARCHAR(256),
 	identifier VARCHAR(256),
 	"type"  "user".credential_type,
-	active BOOLEAN,
-	failed_attempts INT,
-    last_accessed TIMESTAMP
+	active BOOLEAN
 ) AS 
 $$
 BEGIN

@@ -28,8 +28,6 @@ CREATE TABLE IF NOT EXISTS "user".credential (
         END
     ) stored,
     active BOOLEAN NOT NULL,
-    failed_attempts INT NOT NULL DEFAULT(0),
-    last_accessed TIMESTAMP WITHOUT TIME ZONE DEFAULT(now() AT TIME ZONE 'uct'),
 	
     PRIMARY KEY (id)
 );

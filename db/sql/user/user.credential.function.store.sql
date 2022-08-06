@@ -10,13 +10,11 @@ BEGIN
         UPDATE "security".credential
         SET secret = CRYPT(_secret, GEN_SALT('bf'))::VARCHAR(256),
             identifier = _identifier,
-            active = TRUE,
-            failed_attempts = 0,
-            last_accessed = now() AT TIME ZONE 'uct'
+            active = TRUE
         WHERE id = _id;
     ELSE
-        INSERT INTO "user"."credential" (id, secret, identifier, active, failed_attempts)
-        VALUES (_id, CRYPT(_secret, GEN_SALT('bf'))::VARCHAR(256), _identifier, TRUE, 0);
+        INSERT INTO "user"."credential" (id, secret, identifier, active)
+        VALUES (_id, CRYPT(_secret, GEN_SALT('bf'))::VARCHAR(256), _identifier, TRUE);
     END IF;
     RETURN TRUE;
 END
