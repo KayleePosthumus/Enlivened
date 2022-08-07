@@ -20,5 +20,9 @@ function getvals(){
 }
   
 function login() {
-  getvals().then(response => alert(response));
+  window.location.href = './home.html';
+}
+
+function createEvent() {
+  window.location.href = './event_create.html';
 }
