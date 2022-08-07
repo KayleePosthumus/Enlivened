@@ -8,12 +8,11 @@ const map = new Map({
   layers: [
     new TileLayer({
       source: new OSM()
-    }),
-    straitsLayer
+    })
   ],
   view: new View({
     center: [0, 0],
-    zoom: 2
+    zoom: 4
   })
 });
 
@@ -68,9 +67,6 @@ function addUpMarker(long,lat,event){
   straitSource.addFeature(iconFeature);
 }
 
-//Usage Ex
-addPastMarker(28.229271,-25.747868,"hey");
-addUpMarker(27.229271,-21.747868,"hey bitch");
 
 // document.getElementById("createEvent").onclick = function() {
 //   map.on('click', function(evt){
