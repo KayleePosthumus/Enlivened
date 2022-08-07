@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 )
 
@@ -37,7 +38,11 @@ func main() {
 		os.Exit(-1)
 	}
 
+	// Setup CORS for the API
+	credentials := handlers.AllowCredentials()
+	methods := handlers.AllowedMethods([]string{"POST"})
+
 	// Start API on port 8080 in its docker container
 	logger.Info.Println("Starting API on 8080")
-	logger.Error.Fatal(http.ListenAndServe(":8080", router))
+	logger.Error.Fatal(http.ListenAndServe(":8080", handlers.CORS(credentials, methods)(router)))
 }

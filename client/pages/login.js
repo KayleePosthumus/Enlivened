@@ -10,7 +10,7 @@ function getvals(){
         secret: 'test'
       }), 
       headers: myHeaders,
-      mode: 'no-cors'
+      //mode: 'no-cors'
     })
     .then((response) => response.json())
     .then((responseData) => {
@@ -21,5 +21,4 @@ function getvals(){
   
 function login() {
   getvals().then(response => alert(response));
-  
 }
