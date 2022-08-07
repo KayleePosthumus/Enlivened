@@ -9,7 +9,7 @@ function getvals(){
         email: 'test@test.com',
         secret: 'test'
       }), 
-      headers: myHeaders,
+      headers: myHeaders
       //mode: 'no-cors'
     })
     .then((response) => response.json())
@@ -20,5 +20,5 @@ function getvals(){
 }
   
 function login() {
-  getvals().then(response => alert(response));
+  window.location.href = './map_page.html';
 }
