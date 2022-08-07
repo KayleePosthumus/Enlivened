@@ -132,11 +132,11 @@ addCarMarker(20.187,-25.4,"hey");
 addIslamMarker(17.229271,-29.747868,"hey bitch");
 addSupport2Marker(18.229271,-23.747868,"hey bitch");
 
-// document.getElementById("createEvent").onclick = function() {
-//   map.on('click', function(evt){
-//     alert(ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326'));
-//   });
-// };
+document.getElementById("createEvent").onclick = function() {
+  map.on('click', function(evt){
+    alert(ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326'));
+  });
+};
 
 map.on('click', function (evt) {
   var feature = map.forEachFeatureAtPixel(evt.pixel, function (feat, layer) {
