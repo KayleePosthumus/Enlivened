@@ -128,29 +128,28 @@ function addIslamMarker(long,lat,event){
 addSportMarker(28.229271,-25.747868,"hey");
 addSupportMarker(27.229271,-21.747868,"hey bitch");
 addCarMarker(20.187,-25.4,"hey");
-
 addIslamMarker(17.229271,-29.747868,"hey bitch");
 addSupport2Marker(18.229271,-23.747868,"hey bitch");
 
-document.getElementById("asd").onclick = function() {
-  map.on('click', function(evt){
-    alert(ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326'));
-  });
-};
+// document.getElementById("asd").onclick = function() {
+//   map.on('click', function(evt){
+//     alert(ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326'));
+//   });
+// };
 
-map.on('click', function (evt) {
-  var feature = map.forEachFeatureAtPixel(evt.pixel, function (feat, layer) {
-      return feat;
-  }
-  );
+// map.on('click', function (evt) {
+//   var feature = map.forEachFeatureAtPixel(evt.pixel, function (feat, layer) {
+//       return feat;
+//   }
+//   );
 
-  if (feature && feature.get('type')=='Past') {
-      alert(feature.get('data'));
+//   if (feature && feature.get('type')=='Past') {
+//       alert(feature.get('data'));
       
-  }
-  else {
+//   }
+//   else {
 
-  }
-});
+//   }
+// });
 
 
