@@ -20,5 +20,9 @@ function getvals(){
 }
   
 function login() {
-  window.location.href = './map_page.html';
+  window.location.href = './home.html';
+}
+
+function createEvent() {
+  
 }
