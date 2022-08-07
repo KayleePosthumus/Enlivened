@@ -45,7 +45,7 @@
       </div>
     </nav>
 
-    <div class="position-relative">
+    <div class="position-relative" onclick="changeData()">
       <div id="map" class="map" data-bs-toggle="modal" data-bs-target="#myModal"></div>
       <div class="row d-flex justify-content-center">
         <button type="button" id="asd" class="btn btn-dark btn-md w-75 px-5 py-2 my-5 mt-3 position-absolute" onclick="open_win()">Create Event</button>
@@ -60,19 +60,20 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Women's Support Group</h4>
+        <h4 class="modal-title" id="title">Women's Support Group</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal">
         </button>
       </div>
       <!-- Modal body -->
       <div class="modal-body">
-        <p>Hatfield, Gauteng</p>
+        <p id="location">Hatfield, Gauteng</p>
 
-        <p>This women support group aims to provide awareness of womens rights issues and provides a safe haven for women who have been wronged in the past based on their gender.</p>
+        <p id="description">This women support group aims to provide awareness of womens rights issues and provides a safe haven for women who have been wronged in the past based on their gender.</p>
       
-        <b>Spaces left: </b> 2 <br>
-        <b>Time: </b> 18:00 to 20:00 <br>
-        <b>League: </b> Women Only <br>
+        <div id="spaces"><b>Spaces left:</b> 2</div>
+        <div id="time"><b>Time:</b> 18:00 to 20:00</div>
+        <div id="date"><b>Date:</b> 22 July 2022</div>
+        <div id="league"><b>League:</b> Women Only</div>
       </div>
       
       <!-- Modal footer -->
@@ -96,6 +97,39 @@
   function success() {
       alert("You have succesfuly enrolled in this activity!")
     }
+
+    var index = 0
+    var total = 3
+    function changeData() {
+        if (index % total === 0) {
+          document.getElementById('title').innerHTML = 'Women\'s Support Group'
+          document.getElementById('location').innerHTML = 'Hatfield, Gauteng'
+          document.getElementById('description').innerHTML = 'This women support group aims to provide awareness of womens rights issues and provides a safe haven for women who have been wronged in the past based on their gender.'
+          document.getElementById('spaces').innerHTML = '<b>Spaces left:</b> 2'
+          document.getElementById('time').innerHTML = '<b>Time:</b> 18:00 to 20:00'
+          document.getElementById('date').innerHTML = '<b>Date:</b> 22 July 2022'
+          document.getElementById('league').innerHTML = '<b>League:</b> Women Only'
+        }
+        if (index % total === 1) {
+        document.getElementById('title').innerHTML = 'Women\'s Rugby Team'
+        document.getElementById('location').innerHTML = 'Pretoria, Gauteng'
+        document.getElementById('description').innerHTML = 'We are searching for girls interested in playing rugby weekly.'
+        document.getElementById('spaces').innerHTML = '<b>Spaces left:</b> 8'
+        document.getElementById('time').innerHTML = '<b>Time:</b> 14:00 to 22:00'
+        document.getElementById('date').innerHTML = '<b>Date:</b> 11 June 2022'
+        document.getElementById('league').innerHTML = '<b>League:</b> Women Only'
+      }
+      if (index % total === 2) {
+        document.getElementById('title').innerHTML = 'Workshop to change a tyre'
+        document.getElementById('location').innerHTML = 'Sandton, Johannesburg'
+        document.getElementById('description').innerHTML = 'We are interested in hosting a workshop for women and men alike to learn how to do basic mechanical work.'
+        document.getElementById('spaces').innerHTML = '<b>Spaces left:</b> 15'
+        document.getElementById('time').innerHTML = '<b>Time:</b> 12:00 to 16:00'
+        document.getElementById('date').innerHTML = '<b>Date:</b> 15 January 2022'
+        document.getElementById('league').innerHTML = '<b>League:</b> Mixed Gender'
+      }
+      index++
+    };
 </script>
 
 </body>
