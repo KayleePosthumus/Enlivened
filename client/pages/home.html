@@ -3,10 +3,8 @@
 
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.15.1/css/ol.css" type="text/css">
-    <link rel="stylesheet" href="../css/bootstrap-5.2.0-dist/css/bootstrap.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="../css/bootstrap-5.2.0-dist/css/bootstrap.min.css">
+<script src="../css/bootstrap-5.2.0-dist/js/bootstrap.min.js"></script>
     <style>
       .map {
         height: 600px;
@@ -18,7 +16,7 @@
     <script src="../css/bootstrap-5.2.0-dist/js/bootstrap.min.js"></script>
   </head>
 
-  <body>
+  <body class="bg-light">
     <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
       <div class="container-fluid">
         <div class="container-fluid">
@@ -47,11 +45,11 @@
       </div>
     </nav>
 
-    <div class="justify-content-center text-center">
-    <img src="../img/google-maps_23180395_5d1d9d72692770bcbd5e45568aa8a95b89d7a65f-2.png" alt="Italian Trulli" data-bs-toggle="modal" data-bs-target="#myModal">
-    <div class="row d-flex justify-content-center">
-      <button type="button" id="asd" class="btn btn-dark btn-md w-75 px-5 py-2 my-5 mt-3 position-absolute" onclick="open_win()">Create Event</button>
-    </div>
+    <div class="position-relative" onclick="changeData()">
+      <div id="map" class="map" data-bs-toggle="modal" data-bs-target="#myModal"></div>
+      <div class="row d-flex justify-content-center">
+        <button type="button" id="asd" class="btn btn-dark btn-md w-75 px-5 py-2 my-5 mt-3 position-absolute" onclick="open_win()">Create Event</button>
+      </div>
     </div>
 
 
@@ -62,27 +60,27 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">View Event at Hatfield, Gauteng</h4>
+        <h4 class="modal-title" id="title">Women's Support Group</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal">
         </button>
       </div>
       <!-- Modal body -->
       <div class="modal-body">
-        <p>Time: 10:00-15:00
-          <br>
-          Category: Sport
-          <br>
-          League: Women
-          <br>
-          Number of people: 15
-        </p>
+        <p id="location">Hatfield, Gauteng</p>
+
+        <p id="description">This women support group aims to provide awareness of womens rights issues and provides a safe haven for women who have been wronged in the past based on their gender.</p>
+      
+        <div id="spaces"><b>Spaces left:</b> 2</div>
+        <div id="time"><b>Time:</b> 18:00 to 20:00</div>
+        <div id="date"><b>Date:</b> 22 July 2022</div>
+        <div id="league"><b>League:</b> Women Only</div>
       </div>
       
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="open_popup()">Enroll</button>
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="open_upload()">Upload Images</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="success()">Enroll</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="upload()">Upload Images</button>
       </div>
 
     </div>
@@ -93,12 +91,45 @@
   function open_win() {
     window.location.href = './event_create.html';
   }
-  function open_upload() {
-    window.location.href = './upload_page.html';
-  }
-  function open_popup() {
-                alert("You have successfully enrolled for this event!");
-            }
+  function upload() {
+      window.location.href = './upload_page.html';
+    }
+  function success() {
+      alert("You have succesfuly enrolled in this activity!")
+    }
+
+    var index = 0
+    var total = 3
+    function changeData() {
+        if (index % total === 0) {
+          document.getElementById('title').innerHTML = 'Women\'s Support Group'
+          document.getElementById('location').innerHTML = 'Hatfield, Gauteng'
+          document.getElementById('description').innerHTML = 'This women support group aims to provide awareness of womens rights issues and provides a safe haven for women who have been wronged in the past based on their gender.'
+          document.getElementById('spaces').innerHTML = '<b>Spaces left:</b> 2'
+          document.getElementById('time').innerHTML = '<b>Time:</b> 18:00 to 20:00'
+          document.getElementById('date').innerHTML = '<b>Date:</b> 22 July 2022'
+          document.getElementById('league').innerHTML = '<b>League:</b> Women Only'
+        }
+        if (index % total === 1) {
+        document.getElementById('title').innerHTML = 'Women\'s Rugby Team'
+        document.getElementById('location').innerHTML = 'Pretoria, Gauteng'
+        document.getElementById('description').innerHTML = 'We are searching for girls interested in playing rugby weekly.'
+        document.getElementById('spaces').innerHTML = '<b>Spaces left:</b> 8'
+        document.getElementById('time').innerHTML = '<b>Time:</b> 14:00 to 22:00'
+        document.getElementById('date').innerHTML = '<b>Date:</b> 11 June 2022'
+        document.getElementById('league').innerHTML = '<b>League:</b> Women Only'
+      }
+      if (index % total === 2) {
+        document.getElementById('title').innerHTML = 'Workshop to change a tyre'
+        document.getElementById('location').innerHTML = 'Sandton, Johannesburg'
+        document.getElementById('description').innerHTML = 'We are interested in hosting a workshop for women and men alike to learn how to do basic mechanical work.'
+        document.getElementById('spaces').innerHTML = '<b>Spaces left:</b> 15'
+        document.getElementById('time').innerHTML = '<b>Time:</b> 12:00 to 16:00'
+        document.getElementById('date').innerHTML = '<b>Date:</b> 15 January 2022'
+        document.getElementById('league').innerHTML = '<b>League:</b> Mixed Gender'
+      }
+      index++
+    };
 </script>
 
 </body>

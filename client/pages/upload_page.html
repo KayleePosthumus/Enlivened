@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="../css/bootstrap-5.2.0-dist/css/bootstrap.min.css">
 <script src="../css/bootstrap-5.2.0-dist/js/bootstrap.min.js"></script>
 
+
 <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
     <div class="container-fluid">
         <div class="container-fluid">
@@ -26,9 +27,6 @@
                     <a class="nav-link" href="./profile_page.html">Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./event_create.html">Create Event</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="./login_page.html">Logout</a>
                 </li>
             </ul>
@@ -38,26 +36,17 @@
 
     <br>
     <!-- For demo purpose -->
-<div class="row d-flex justify-content-center mt-4">
-    <div class="col-sm-6">
-        <div class="card text-center">
-            <div class="card-header">
-            Add To Our Gallery
-            </div>
-                <div class="card-body">
-                <h5 class="card-title">Upload Images</h5>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">Browse..</span>
-                    <input id="upload" type="file" onchange="readURL(this);" class="form-control border-0">
-                </div>
-                
-                <br>
-
-            </div>   
-        </div>
+<div class="card text-center">
+    <div class="card-header">
+      Add new post
     </div>
-</div>
-
-</html>
+    <div class="card-body">
+      <h5 class="card-title">Upload Images</h5>
+      <input id="upload" type="file" onchange="readURL(this);" class="form-control border-0">
+      <br>
+      <div class="input-group-append">
+        <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+    </div>   
+  </div>
 
 
