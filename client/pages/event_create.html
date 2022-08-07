@@ -99,12 +99,19 @@
                             </div>
                         </div>
 
-                        <button type="button" id="createEvent" class="btn btn-dark">Create Event</button>
+                        <button type="button" id="createEvent" class="btn btn-dark" onclick="successful()">Create Event</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        function successful() {
+            alert("Event succesfully created")
+            window.location.href = './home.html';
+        }
+    </script>
 
 </body>
 
