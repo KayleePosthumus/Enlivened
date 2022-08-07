@@ -24,5 +24,5 @@ function login() {
 }
 
 function createEvent() {
-  window.location.href = './event_create.html';
+  
 }
