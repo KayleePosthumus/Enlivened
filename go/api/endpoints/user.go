@@ -207,5 +207,5 @@ func Login(writer http.ResponseWriter, request *http.Request) {
 
 	logger.Info.Println("Users Succesfully logged in")
 
-	utils.JSONResponse(writer, request, users)
+	utils.JSONResponse(writer, request, users[0])
 }
