@@ -81,7 +81,7 @@
       <!-- Modal footer -->
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Enroll</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="open_popup()">Enroll</button>
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="open_upload()">Upload Images</button>
       </div>
 
@@ -96,6 +96,9 @@
   function open_upload() {
     window.location.href = './upload_page.html';
   }
+  function open_popup() {
+                alert("You have successfully enrolled for this event!");
+            }
 </script>
 
 </body>
