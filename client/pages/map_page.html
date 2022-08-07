@@ -52,22 +52,10 @@
     <div class="position-relative">
     <div id="map" class="map"></div>
     <div class="row d-flex justify-content-center">
-      <button type="button" id="createEvent" class="btn btn-dark btn-md w-75 px-5 py-2 my-5 mt-3 position-absolute">Create Event</button>
+      <button type="button" id="createEvent" class="btn btn-dark btn-md w-75 px-5 py-2 my-5 mt-3 position-absolute"  data-bs-toggle="modal" data-bs-target="#myModal">Create Event</button>
     </div>
     </div>
 
-    
-
-    
-  </body>
-
-  <body>
-
-<div class="container mt-3">
-  <h3>Modal</h3>  
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Open Modal
-  </button>
-</div>
 
 <!-- The Modal -->
 <div class="modal fade" id="myModal">
@@ -76,13 +64,15 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
+        <h4 class="modal-title">Hatfield, Pretoria</h4>
         <h4 class="modal-title">Create Event</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal">
         </button>
       </div>
-
+      
       <!-- Modal body -->
       <div class="modal-body">
+      
         <h5 class="card-title text-center">Category</h5>
         <div class="form-check">
           <input class="form-check-input" type="radio" name="category" id="category1" value="option1" checked>
@@ -102,7 +92,7 @@
             Sport
           </label>
         </div>
-
+      
         <h5 class="card-title text-center">League</h5>
         <div class="form-check">
           <input class="form-check-input" type="radio" name="league" id="league1" value="option1" checked>
@@ -116,7 +106,7 @@
             Mixed
           </label>
         </div>
-
+      
         <br>
         <div class="form-group row">
           <label for="inputPassword" class="col-sm-2 col-form-label">Capacity</label>
@@ -124,16 +114,17 @@
             <input type="number" class="form-control" id="inputPassword" placeholder="8">
           </div>
         </div>
-
+      
         <br>
-
+      
         <label for="exampleFormControlTextarea3">Description</label>
         <textarea class="form-control" id="exampleFormControlTextarea3" rows="7"></textarea>
-       
+      
       </div>
-
+      
       <!-- Modal footer -->
       <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Create event</button>
       </div>
 
