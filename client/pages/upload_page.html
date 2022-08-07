@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="../css/bootstrap-5.2.0-dist/css/bootstrap.min.css">
 <script src="../css/bootstrap-5.2.0-dist/js/bootstrap.min.js"></script>
 
+<body style="bg-light">
 
 <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
     <div class="container-fluid">
@@ -45,8 +46,14 @@
       <input id="upload" type="file" onchange="readURL(this);" class="form-control border-0">
       <br>
       <div class="input-group-append">
-        <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
-    </div>   
-  </div>
+        <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label><br>
+        <button type="button" class="btn btn-primary" style="margin-top: 10px;" data-bs-dismiss="modal" onclick="open_win()">Submit</button>
+        </div>   
+</div>
 
-
+  <script>
+    function open_win() {
+        alert("Picture succesfully added!")
+        window.location.href = './home.html';
+    }
+</script>
