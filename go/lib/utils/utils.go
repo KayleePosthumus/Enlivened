@@ -38,6 +38,8 @@ func UnmarshalJSON(writer http.ResponseWriter, request *http.Request, input inte
 
 // jsonResponse
 func jsonResponse(writer http.ResponseWriter, request *http.Request, status int, payload interface{}) {
+	writer.Header().Set("Access-Control-Allow-Origin", "*")
+	writer.Header().Set("Access-Control-Allow-Credentials", "true")
 	writer.Header().Set("Content-Type", "application/json")
 	writer.WriteHeader(status)
 	encoder := json.NewEncoder(writer)
