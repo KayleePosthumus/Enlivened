@@ -127,16 +127,16 @@ function addIslamMarker(long,lat,event){
 //Usage Ex
 addSportMarker(28.229271,-25.747868,"hey");
 addSupportMarker(27.229271,-21.747868,"hey bitch");
-addCarMarker(28.187,-25.4,"hey");
-addSupportMarker(27.952,-21.485,"hey bitch");
-addSupport2Marker(27.229747,-13.747868,"hey");
-addIslamMarker(17.229271,-29.747868,"hey bitch");
+addCarMarker(20.187,-25.4,"hey");
 
-document.getElementById("createEvent").onclick = function() {
-  map.on('click', function(evt){
-    alert(ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326'));
-  });
-};
+addIslamMarker(17.229271,-29.747868,"hey bitch");
+addSupport2Marker(18.229271,-23.747868,"hey bitch");
+
+// document.getElementById("createEvent").onclick = function() {
+//   map.on('click', function(evt){
+//     alert(ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326'));
+//   });
+// };
 
 map.on('click', function (evt) {
   var feature = map.forEachFeatureAtPixel(evt.pixel, function (feat, layer) {
