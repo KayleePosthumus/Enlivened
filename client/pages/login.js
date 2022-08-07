@@ -20,5 +20,5 @@ function getvals(){
 }
   
 function login() {
-  window.location.href = './map_page.html';
+  getvals().then(response => alert(response));
 }
