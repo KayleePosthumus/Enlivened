@@ -17,21 +17,39 @@ const map = new Map({
     straitsLayer
   ],
   view: new View({
-    center: [0, 0],
-    zoom: 2
+    center: ol.proj.transform([28.229271,-25.747868], 'EPSG:4326','EPSG:3857'),
+    zoom: 5
   })
 });
 
 //MARKER TYPES
-var pastMarkerStyle = new ol.style.Style({
+var sportMarkerStyle = new ol.style.Style({
   image: new ol.style.Icon({
-    src: '../markers/default.png'
+    src: '../img/pin_sport.png'
   })
 });
 
-var upMarkerStyle = new ol.style.Style({
+var supportMarkerStyle = new ol.style.Style({
   image: new ol.style.Icon({
-    src: '../markers/default.png'
+    src: '../img/pin_car.png'
+  })
+});
+
+var carMarkerStyle = new ol.style.Style({
+  image: new ol.style.Icon({
+    src: '../img/pin_support.png'
+  })
+});
+
+var support2MarkerStyle = new ol.style.Style({
+  image: new ol.style.Icon({
+    src: '../img/pin_support2.png'
+  })
+});
+
+var islamMarkerStyle = new ol.style.Style({
+  image: new ol.style.Icon({
+    src: '../img/pin_islam.png'
   })
 });
 
@@ -51,37 +69,74 @@ var upMarkerStyle = new ol.style.Style({
 // }
 
 //Add Markers
-function addPastMarker(long,lat,event){
+function addSportMarker(long,lat,event){
   var iconFeature = new ol.Feature({
     geometry: new ol.geom.Point(ol.proj.transform([long,lat], 'EPSG:4326','EPSG:3857')),
     type: 'Past',
     data: event
   })
 
-  iconFeature.setStyle(pastMarkerStyle);
+  iconFeature.setStyle(sportMarkerStyle);
   straitSource.addFeature(iconFeature);
 }
 
-function addUpMarker(long,lat,event){
+function addCarMarker(long,lat,event){
+  var iconFeature = new ol.Feature({
+    geometry: new ol.geom.Point(ol.proj.transform([long,lat], 'EPSG:4326','EPSG:3857')),
+    type: 'Car',
+    data: event
+  })
+
+  iconFeature.setStyle(carMarkerStyle);
+  straitSource.addFeature(iconFeature);
+}
+
+function addSupportMarker(long,lat,event){
   var iconFeature = new ol.Feature({
     geometry: new ol.geom.Point(ol.proj.transform([long,lat], 'EPSG:4326','EPSG:3857')),
     type: 'Upcoming',
     data: event
   })
 
-  iconFeature.setStyle(upMarkerStyle);
+  iconFeature.setStyle(supportMarkerStyle);
+  straitSource.addFeature(iconFeature);
+}
+
+function addSupport2Marker(long,lat,event){
+  var iconFeature = new ol.Feature({
+    geometry: new ol.geom.Point(ol.proj.transform([long,lat], 'EPSG:4326','EPSG:3857')),
+    type: 'Upcoming',
+    data: event
+  })
+
+  iconFeature.setStyle(support2MarkerStyle);
+  straitSource.addFeature(iconFeature);
+}
+
+function addIslamMarker(long,lat,event){
+  var iconFeature = new ol.Feature({
+    geometry: new ol.geom.Point(ol.proj.transform([long,lat], 'EPSG:4326','EPSG:3857')),
+    type: 'Upcoming',
+    data: event
+  })
+
+  iconFeature.setStyle(islamMarkerStyle);
   straitSource.addFeature(iconFeature);
 }
 
 //Usage Ex
-addPastMarker(28.229271,-25.747868,"hey");
-addUpMarker(27.229271,-21.747868,"hey bitch");
+addSportMarker(28.229271,-25.747868,"hey");
+addSupportMarker(27.229271,-21.747868,"hey bitch");
+addCarMarker(20.187,-25.4,"hey");
 
-document.getElementById("createEvent").onclick = function() {
-  map.on('click', function(evt){
-    alert(ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326'));
-  });
-};
+addIslamMarker(17.229271,-29.747868,"hey bitch");
+addSupport2Marker(18.229271,-23.747868,"hey bitch");
+
+// document.getElementById("createEvent").onclick = function() {
+//   map.on('click', function(evt){
+//     alert(ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326'));
+//   });
+// };
 
 map.on('click', function (evt) {
   var feature = map.forEachFeatureAtPixel(evt.pixel, function (feat, layer) {
