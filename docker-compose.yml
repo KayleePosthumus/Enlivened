@@ -19,22 +19,22 @@ services:
     networks:
       - tampoff-network
 
-  tampoff-api:
-    build:
-      context: ./go
-      dockerfile: api/Dockerfile
-    container_name: tampoff-api
-    hostname: tampoff-api
-    env_file: .env
-    restart: unless-stopped
-    volumes:
-      - ./go/api/config.json:/run/secrets/config.json
-    ports:
-      - 8100:8080
-    networks:
-      - tampoff-network
-    depends_on:
-      - tampoff-db
+  # tampoff-api:
+  #   build:
+  #     context: ./go
+  #     dockerfile: api/Dockerfile
+  #   container_name: tampoff-api
+  #   hostname: tampoff-api
+  #   env_file: .env
+  #   restart: unless-stopped
+  #   volumes:
+  #     - ./go/api/config.json:/run/secrets/config.json
+  #   ports:
+  #     - 8100:8080
+  #   networks:
+  #     - tampoff-network
+  #   depends_on:
+  #     - tampoff-db
 
 networks:
     tampoff-network:
