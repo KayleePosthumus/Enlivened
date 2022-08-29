@@ -2,8 +2,6 @@ package db
 
 import (
 	"database/sql"
-	"os"
-	"strconv"
 	"time"
 
 	_ "github.com/lib/pq"
@@ -26,18 +24,13 @@ type Access struct {
 
 // RegisterAccess creates a connection pool
 func RegisterAccess() error {
-	db, err := sql.Open("postgres", os.Getenv("DATABASE_DSN"))
+	db, err := sql.Open("postgres", "host=localhost port=5432 user=admin dbname=tampoff sslmode=disable")
 	if err != nil {
 		return err
 	}
-	maxIdleConn, err := strconv.Atoi(os.Getenv("DATABASE_MAX_IDLE_CONNECTIONS"))
-	if err != nil {
-		return err
-	}
-	maxOpenConn, err := strconv.Atoi(os.Getenv("DATABASE_MAX_OPEN_CONNECTIONS"))
-	if err != nil {
-		return err
-	}
+	maxIdleConn := 5
+	maxOpenConn := 25
+
 	db.SetMaxIdleConns(maxIdleConn)
 	db.SetMaxOpenConns(maxOpenConn)
 	duration, err := time.ParseDuration("30m")
