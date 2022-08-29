@@ -42,7 +42,7 @@ func main() {
 	credentials := handlers.AllowCredentials()
 	methods := handlers.AllowedMethods([]string{"POST"})
 
-	// Start API on port 8080 in its docker container
-	logger.Info.Println("Starting API on 8080")
-	logger.Error.Fatal(http.ListenAndServe(":8080", handlers.CORS(credentials, methods)(router)))
+	// Start API on port 8100 in its docker container
+	logger.Info.Println("Starting API on 8100")
+	logger.Error.Fatal(http.ListenAndServe(":8100", handlers.CORS(credentials, methods)(router)))
 }
