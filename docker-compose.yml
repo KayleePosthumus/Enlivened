@@ -12,7 +12,7 @@ services:
       POSTGRES_PASSWORD: "admin"
       POSTGRES_DB: "tampoff"
     ports:
-      - "5432:5432"
+      - "8101:5432"
     volumes:
       - ./db/postgres-data:/var/lib/postgresql/data
       - ./db/sql:/docker-entrypoint-initdb.d

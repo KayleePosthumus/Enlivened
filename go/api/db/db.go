@@ -24,7 +24,7 @@ type Access struct {
 
 // RegisterAccess creates a connection pool
 func RegisterAccess() error {
-	db, err := sql.Open("postgres", "host=localhost port=5432 user=admin dbname=tampoff sslmode=disable")
+	db, err := sql.Open("postgres", "host=localhost port=8101 user=admin dbname=tampoff sslmode=disable")
 	if err != nil {
 		return err
 	}
