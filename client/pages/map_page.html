@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="../css/bootstrap-5.2.0-dist/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="../css/bootstrap-5.2.0-dist/css/bootstrap.min.css">
+  <script src="../css/bootstrap-5.2.0-dist/js/bootstrap.min.js"></script>
     <style>
       .map {
-        height: 250px;
+        height: 450px;
         width: 100%;
       }
     </style>
@@ -17,44 +19,42 @@
     <script type="module" src="map.js"></script>
     <script src="../css/bootstrap-5.2.0-dist/js/bootstrap.min.js"></script>
   </head>
+  
 
   <body class="bg-light">
     <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
       <div class="container-fluid">
-          <div class="container-fluid">
-              <a class="navbar-brand" href="./home.html">
-                  <img src="../img/enlivened-dark.svg" alt="" width="100">
-              </a>
-          </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="./home.html">Home</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="./profile_page.html">Profile</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="./event_create.html">Create Event</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="./login_page.html">Logout</a>
-                  </li>
-              </ul>
-          </div>
+        <div class="container-fluid">
+          <a class="navbar-brand" href="./home.html">
+            <img src="../img/enlivened-dark.svg" alt="" width="130">
+          </a>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="./home.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./profile_page.html">Profile</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="./login_page.html">Logout</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
 
-    <div class="position-relative">
-    <div id="map" class="map"></div>
-    <div class="row d-flex justify-content-center">
-      <button type="button" id="createEvent" class="btn btn-dark btn-md w-75 px-5 py-2 my-5 mt-3 position-absolute"  data-bs-toggle="modal" data-bs-target="#myModal">Create Event</button>
-    </div>
-    </div>
+      <div id="map" class="map" data-bs-toggle="modal" data-bs-target="#myModal"></div>
+      <div class="row d-flex justify-content-center">
+        <button type="button" id="asd" class="btn btn-dark btn-md w-75 px-5 py-2 my-5 mt-3 position-absolute" onclick="open_win()">Create Event</button>
+      </div>
+
 
 
 <!-- The Modal -->
@@ -64,73 +64,77 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Create Event</h4>
+        <h4 class="modal-title" id="title">Women's Support Group</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal">
         </button>
       </div>
-      
       <!-- Modal body -->
       <div class="modal-body">
+        <p id="location">Hatfield, Gauteng</p>
+
+        <p id="description">This women support group aims to provide awareness of womens rights issues and provides a safe haven for women who have been wronged in the past based on their gender.</p>
       
-        <h5 class="card-title text-center">Category</h5>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="category" id="category1" value="option1" checked>
-          <label class="form-check-label" for="category1">
-            Support
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="category" id="category2" value="option2">
-          <label class="form-check-label" for="category2">
-            Education
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="category" id="category3" value="option3">
-          <label class="form-check-label" for="category3">
-            Sport
-          </label>
-        </div>
-      
-        <h5 class="card-title text-center">League</h5>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="league" id="league1" value="option1" checked>
-          <label class="form-check-label" for="league1">
-            Women
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="league" id="league2" value="option2">
-          <label class="form-check-label" for="league2">
-            Mixed
-          </label>
-        </div>
-      
-        <br>
-        <div class="form-group row">
-          <label for="inputPassword" class="col-sm-2 col-form-label">Capacity</label>
-          <div class="col-sm-10">
-            <input type="number" class="form-control" id="inputPassword" placeholder="8">
-          </div>
-        </div>
-      
-        <br>
-      
-        <label for="exampleFormControlTextarea3">Description</label>
-        <textarea class="form-control" id="exampleFormControlTextarea3" rows="7"></textarea>
-      
+        <div id="spaces"><b>Spaces left:</b> 2</div>
+        <div id="time"><b>Time:</b> 18:00 to 20:00</div>
+        <div id="date"><b>Date:</b> 22 July 2022</div>
+        <div id="league"><b>League:</b> Women Only</div>
       </div>
       
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Create event</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="success()">Enroll</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="upload()">Upload Images</button>
       </div>
 
     </div>
   </div>
 </div>
 
+<script>
+  function open_win() {
+    window.location.href = './event_create.html';
+  }
+  function upload() {
+      window.location.href = './upload_page.html';
+    }
+  function success() {
+      alert("You have succesfuly enrolled in this activity!")
+    }
+
+    var index = 0
+    var total = 3
+    function changeData() {
+        if (index % total === 2) {
+          document.getElementById('title').innerHTML = 'Women\'s Support Group'
+          document.getElementById('location').innerHTML = 'Hatfield, Gauteng'
+          document.getElementById('description').innerHTML = 'This women support group aims to provide awareness of womens rights issues and provides a safe haven for women who have been wronged in the past based on their gender.'
+          document.getElementById('spaces').innerHTML = '<b>Spaces left:</b> 2'
+          document.getElementById('time').innerHTML = '<b>Time:</b> 18:00 to 20:00'
+          document.getElementById('date').innerHTML = '<b>Date:</b> 22 July 2022'
+          document.getElementById('league').innerHTML = '<b>League:</b> Women Only'
+        }
+        if (index % total === 1) {
+        document.getElementById('title').innerHTML = 'Women\'s Rugby Team'
+        document.getElementById('location').innerHTML = 'Pretoria, Gauteng'
+        document.getElementById('description').innerHTML = 'We are searching for girls interested in playing rugby weekly.'
+        document.getElementById('spaces').innerHTML = '<b>Spaces left:</b> 8'
+        document.getElementById('time').innerHTML = '<b>Time:</b> 14:00 to 22:00'
+        document.getElementById('date').innerHTML = '<b>Date:</b> 11 June 2022'
+        document.getElementById('league').innerHTML = '<b>League:</b> Women Only'
+      }
+      if (index % total === 0) {
+        document.getElementById('title').innerHTML = 'Workshop to change a tyre'
+        document.getElementById('location').innerHTML = 'Sandton, Johannesburg'
+        document.getElementById('description').innerHTML = 'We are interested in hosting a workshop for women and men alike to learn how to do basic mechanical work.'
+        document.getElementById('spaces').innerHTML = '<b>Spaces left:</b> 15'
+        document.getElementById('time').innerHTML = '<b>Time:</b> 12:00 to 16:00'
+        document.getElementById('date').innerHTML = '<b>Date:</b> 15 January 2022'
+        document.getElementById('league').innerHTML = '<b>League:</b> Mixed Gender'
+      }
+      index++
+    };
+</script>
 
 </body>
 </html>

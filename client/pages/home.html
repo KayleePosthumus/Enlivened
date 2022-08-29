@@ -19,13 +19,14 @@
     <script type="module" src="map.js"></script>
     <script src="../css/bootstrap-5.2.0-dist/js/bootstrap.min.js"></script>
   </head>
+  
 
   <body class="bg-light">
     <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
       <div class="container-fluid">
         <div class="container-fluid">
           <a class="navbar-brand" href="./home.html">
-            <img src="../img/enlivened-dark.svg" alt="" width="100">
+            <img src="../img/enlivened-dark.svg" alt="" width="130">
           </a>
         </div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -49,12 +50,11 @@
       </div>
     </nav>
 
-    <div class="position-relative" onclick="changeData()">
-      <div id="map" class="map" data-bs-toggle="modal" data-bs-target="#myModal"></div>
+      <div id="map" class="map" data-bs-toggle="modal" data-bs-target="#myModal" onclick="changeData()"></div>
       <div class="row d-flex justify-content-center">
         <button type="button" id="asd" class="btn btn-dark btn-md w-75 px-5 py-2 my-5 mt-3 position-absolute" onclick="open_win()">Create Event</button>
       </div>
-    </div>
+
 
 
 <!-- The Modal -->
