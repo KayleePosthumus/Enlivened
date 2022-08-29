@@ -6,7 +6,7 @@ const Login = () => {
         <div class="bg-light">
             <Navbar/>
             <div class="row d-flex justify-content-center mt-4">
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                     <div class="card">
                     <div class="card-header text-center h1">
                         Log In
