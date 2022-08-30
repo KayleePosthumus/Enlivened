@@ -15,55 +15,47 @@ const Signup = () => {
 
     const signUp = (e) =>{
     }
-
+    
     return (
-        <div class="bg-light">
-            <Navbar/>
-            <div class="row justify-content-center mt-4">
-
-                <div class="w-auto card">
-                    
-                    <div class="card-header h1">
-                        SIGN UP
-                    </div>
-
-                    <div class="card-body">
-
-                        <form onSubmit={signUp}>
-
-                            <div class="mt-4">
-
-                                <div class="flex items-center">
-                                    <MdTitle size={25}/>
-                                    <input type="text" placeholder="Enter Name" class="w-full px-4 py-2 mt-2 ml-2 rounded border" onChange = {(e) => {
+        <section class="login-block">
+        
+        <br/>
+            <div class="container">
+            <div class="row">
+                <div class="col-md-4 login-sec">
+                    <h2 class="text-center">Sign Up</h2>
+                    <form class="login-form" onSubmit={signUp}>
+            <div class="form-group">
+                <label for="exampleInputEmail1" class="text-uppercase">Username</label>
+                <input type="text" class="form-control" placeholder="" onChange = {(e) => {
                                         setUserName(e.target.value)
                                     }} required/>
-                                </div>
+                
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1" class="text-uppercase">Email</label>
+                <input type="text" class="form-control" placeholder="" onChange = {(e) => {
 
-                                <div class="flex items-center">
-                                    <MdOutlineMailOutline size={25}/>
-                                    <input type="text" placeholder="Enter Email" class="w-full px-4 py-2 mt-2 rounded border" onChange = {(e) => {
+var email = e.target.value;
 
-                                        var email = e.target.value;
+if(!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)){
 
-                                        if(!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)){
+    if(!errorMessage.includes("Invalid Email Address")){
+    updateErrorMessage([...errorMessage, "Invalid Email Address"]);
+    }
 
-                                            if(!errorMessage.includes("Invalid Email Address")){
-                                            updateErrorMessage([...errorMessage, "Invalid Email Address"]);
-                                            }
+}else
+{
+    setUserEmail(email)
+    updateErrorMessage(errorMessage.filter(item => item !== "Invalid Email Address"));
+}
 
-                                        }else
-                                        {
-                                            setUserEmail(email)
-                                            updateErrorMessage(errorMessage.filter(item => item !== "Invalid Email Address"));
-                                        }
-                                        
-                                    }} required/>
-                                </div>
-
-                                <div class="flex items-center">
-                                    <BiLockOpenAlt size={25}/>
-                                    <input type="password" placeholder="Enter Password" class="w-full px-4 py-2 mt-2 ml-2 rounded border" onChange = {(e) => {
+}} required/>
+                
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1" class="text-uppercase">Password</label>
+                <input type="password" class="form-control" placeholder="" onChange = {(e) => {
                                         var uPass = e.target.value;
 
                                         if(!errorMessage.includes("Passwords do not match") && uPass !== userConfPass){
@@ -78,11 +70,11 @@ const Signup = () => {
                                         }
 
                                     }} required/>
-                                </div>
+            </div>
 
-                                <div class="flex items-center">
-                                    <BiLockAlt size={25}/>
-                                    <input type="password" placeholder="Confirm Password" class="w-full px-4 py-2 mt-2 ml-2 rounded border" onChange = {(e) => {
+            <div class="form-group">
+                <label for="exampleInputPassword1" class="text-uppercase">Confirm Password</label>
+                <input type="password" class="form-control" placeholder="" onChange = {(e) => {
                                         var cPass = e.target.value;
 
                                         if(!errorMessage.includes("Passwords do not match") && userPass !== cPass){
@@ -97,20 +89,35 @@ const Signup = () => {
                                         }
 
                                     }} required/>
-                                </div>
-
-                                <button type="submit" class="btn btn-dark px-6 py-2 mt-4 w-100" disabled={errorMessage !== "" || userPass === "" || userEmail === "" || userName === ""}>SignUp</button>
-                            
-                            </div>
-
-                        </form>
-
-                    </div>
-
-                </div>
-
             </div>
+        
+            <br/>
+            <button type="submit" class="btn-login float-right"  disabled={errorMessage !== "" || userPass === "" || userEmail === "" || userName === ""}>Sign Up</button>
+            <br/>
+            <p>OR</p>
+            <button type="button" class="btn-login float-right" onclick="window.location.href='./login.jsx'">Login</button>
+            
+        
+        
+        </form> 
+
+       </div>
+        <div class="col-md-8 banner-sec">
+        <img class="d-block img-fluid" src="https://www.motosha.com/files/preview/1280x853/6173-yellow-dandelion-flower-dark-edit.jpg" width="8000" height="9000" alt="First slide"/>
+  
+        <h2 class="centered">Welcome to Enlivened!</h2>
+        <p class="paragraph">A place where you can find your social community, encourage one another, build confidence, create and attend activities of your choice.</p>
+
+      
+    
+
+            
         </div>
+</div>
+</div> 
+
+</section>
+
     );
 }
 

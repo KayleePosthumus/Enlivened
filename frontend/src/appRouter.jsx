@@ -3,7 +3,7 @@ import Home from './pages/home';
 import Login from './pages/login';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Signup from './pages/signup';
-import Event from './pages/eventComponent';
+import Event from './modals/eventComponent';
 
 const AppRouter = () => {
     return (
