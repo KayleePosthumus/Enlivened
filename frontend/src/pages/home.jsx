@@ -3,33 +3,49 @@ import { Map, Marker } from "pigeon-maps"
 import Navbar from './navbar';
 import { useNavigate } from "react-router-dom";
 import EventComponent from '../modals/eventComponent';
+import axios from 'axios';
 
 const Home = () => {     
     
-    const [markers,setMarkers] = useState([]);
+    const [markers,setMarkers] = useState(undefined);
     const [showEventComp,setShowEventComp] = useState(false);
     const navigate = useNavigate();
 
+    // React.useEffect(() => {
+    //   axios
+    //       .post('http://197.245.137.83:8728/event/find')
+    //       .then(function (response) {
+    //           console.log(response);
+    //       })
+    //       .catch(function (error) {
+    //           console.log(error);
+    //       });
+    // });
+
     useEffect(() =>{
-      fetch("localhost:8080/events").then(
+      const requestOptions = {
+        method: 'POST',
+        body: {}
+      };
+      fetch("http://197.245.137.83:8728/event/find",requestOptions).then(
         response => response.json()
       ).then(
         data => 
-          setMarkers(data)
+          console.log(data)
       )
     }, [])
 
       return (
-        <div class="bg-light">
+        <div className="bg-light">
             <Navbar/>
-            <div class="position-relative">
+            <div className="position-relative">
                 <Map height={500} defaultCenter={[50.879, 4.6997]} defaultZoom={11}>
 
-                {(markers.length === 0) ? (
-                    <h5 class="mt-5"> LOADING ...</h5>
+                {(typeof markers === 'undefined') ? (
+                    <h5 className="mt-5"> LOADING ...</h5>
                 ) : (
                     markers.map((event, i) => (
-                        <Marker width={50} anchor={[event.lat, event.long]} onClick={
+                        <Marker width={50} anchor={[event.latitude, event.longitude]} onClick={
                             alert("you clicked on"+event.name)
                         } />
                     ))
@@ -43,7 +59,7 @@ const Home = () => {
                 </div>
             </div>
 
-            <EventComponent show={showEventComp} />
+            {/* <EventComponent show={showEventComp} /> */}
             
         </div>
       );
