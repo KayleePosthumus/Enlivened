@@ -3,6 +3,7 @@ import Axios from 'axios';
 import { BiLockOpenAlt,BiLockAlt } from "react-icons/bi";
 import { MdOutlineMailOutline,MdTitle } from "react-icons/md";
 import Navbar from './navbar';
+import { Navigate } from 'react-router-dom';
 
 
 const Signup = () => {
@@ -14,109 +15,123 @@ const Signup = () => {
     const [errorMessage, updateErrorMessage] = useState([]);
 
     const signUp = (e) =>{
+
+        // const requestOptions = {
+        // method: 'POST',
+        // body: JSON.stringify({"FirstName":userName, "Email":userEmail,"Password":userPass})
+        // };
+        // fetch("http://197.245.137.83:8728/user/register",requestOptions).then(
+        // response => response.json()
+        // ).then(
+        // data =>
+        // console.log(data)
+        // );
+        Navigate("\login");
+        
     }
     
     return (
-        <section class="login-block">
-        
-        <br/>
-            <div class="container">
-            <div class="row">
-                <div class="col-md-4 login-sec">
-                    <h2 class="text-center">Sign Up</h2>
-                    <form class="login-form" onSubmit={signUp}>
-            <div class="form-group">
-                <label for="exampleInputEmail1" class="text-uppercase">Username</label>
-                <input type="text" class="form-control" placeholder="" onChange = {(e) => {
-                                        setUserName(e.target.value)
-                                    }} required/>
-                
-            </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1" class="text-uppercase">Email</label>
-                <input type="text" class="form-control" placeholder="" onChange = {(e) => {
-
-var email = e.target.value;
-
-if(!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)){
-
-    if(!errorMessage.includes("Invalid Email Address")){
-    updateErrorMessage([...errorMessage, "Invalid Email Address"]);
-    }
-
-}else
-{
-    setUserEmail(email)
-    updateErrorMessage(errorMessage.filter(item => item !== "Invalid Email Address"));
-}
-
-}} required/>
-                
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1" class="text-uppercase">Password</label>
-                <input type="password" class="form-control" placeholder="" onChange = {(e) => {
-                                        var uPass = e.target.value;
-
-                                        if(!errorMessage.includes("Passwords do not match") && uPass !== userConfPass){
-
-                                            if(!errorMessage.includes("Passwords do not match")){
-                                            updateErrorMessage([...errorMessage, "Passwords do not match"]);
-                                            }
-
-                                        }else{
-                                            updateErrorMessage(errorMessage.filter(item => item !== "Passwords do not match"));
-                                            setUserPass(uPass);
-                                        }
-
-                                    }} required/>
-            </div>
-
-            <div class="form-group">
-                <label for="exampleInputPassword1" class="text-uppercase">Confirm Password</label>
-                <input type="password" class="form-control" placeholder="" onChange = {(e) => {
-                                        var cPass = e.target.value;
-
-                                        if(!errorMessage.includes("Passwords do not match") && userPass !== cPass){
-
-                                            if(!errorMessage.includes("Passwords do not match")){
-                                            updateErrorMessage([...errorMessage, "Passwords do not match"]);
-                                            }
-
-                                        }else{
-                                            updateErrorMessage(errorMessage.filter(item => item !== "Passwords do not match"));
-                                            setUserConfPass(cPass);
-                                        }
-
-                                    }} required/>
-            </div>
+        <section className="login-block">
         
             <br/>
-            <button type="submit" class="btn-login float-right"  disabled={errorMessage !== "" || userPass === "" || userEmail === "" || userName === ""}>Sign Up</button>
-            <br/>
-            <p>OR</p>
-            <button type="button" class="btn-login float-right" onclick="window.location.href='./login.jsx'">Login</button>
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-4 login-sec">
+                        <h2 className="text-center">Sign Up</h2>
+                        <form className="login-form" onSubmit={signUp}>
+
+                            { errorMessage.length>0 ? (
+                                <p>{errorMessage[0]}</p>
+                            ):(
+                                <div></div>
+                            )}
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1" className="text-uppercase mb-2">Username</label>
+                                <input type="text" className="form-control mb-3" placeholder="" onChange = {(e) => {
+                                                        setUserName(e.target.value)
+                                                    }} required/>
+                                
+                            </div>
+
+                            <div className="form-group">
+                                <label for="exampleInputEmail1" className="text-uppercase mb-2">Email</label>
+                                <input type="text" className="form-control mb-3" placeholder="" onChange = {(e) => {
+
+                                    var email = e.target.value;
+
+                                    if(!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)){
+
+                                        if(!errorMessage.includes("Invalid Email Address")){
+                                        updateErrorMessage([...errorMessage, "Invalid Email Address"]);
+                                        }
+
+                                    }else
+                                    {
+                                        setUserEmail(email)
+                                        updateErrorMessage(errorMessage.filter(item => item !== "Invalid Email Address"));
+                                    }
+
+                                }} required/>
+                                
+                            </div>
+
+                            <div className="form-group">
+                                <label for="exampleInputPassword1" className="text-uppercase mb-2">Password</label>
+                                <input type="password" className="form-control mb-3" placeholder="" onChange = {(e) => {
+                                    var uPass = e.target.value;
+
+                                    if(!errorMessage.includes("Passwords do not match") && uPass !== userConfPass){
+
+                                        if(!errorMessage.includes("Passwords do not match")){
+                                        updateErrorMessage([...errorMessage, "Passwords do not match"]);
+                                        }
+
+                                    }else{
+                                        updateErrorMessage(errorMessage.filter(item => item !== "Passwords do not match"));
+                                        setUserPass(uPass);
+                                    }
+
+                                }} required/>
+
+                            </div>
+
+                            <div className="form-group">
+                                <label for="exampleInputPassword1" className="text-uppercase mb-2">Confirm Password</label>
+                                <input type="password" className="form-control " placeholder="" onChange = {(e) => {
+                                    var cPass = e.target.value;
+
+                                    if(!errorMessage.includes("Passwords do not match") && userPass !== cPass){
+
+                                        if(!errorMessage.includes("Passwords do not match")){
+                                        updateErrorMessage([...errorMessage, "Passwords do not match"]);
+                                        }
+
+                                    }else{
+                                        updateErrorMessage(errorMessage.filter(item => item !== "Passwords do not match"));
+                                        setUserConfPass(cPass);
+                                    }
+
+                                }} required/>
+                            </div>
             
-        
-        
-        </form> 
+                            <br/>
+                            <button type="submit" className="btn-login float-right"  disabled={errorMessage.length > 0 || userPass === "" || userEmail === "" || userName === ""}>Sign Up</button>
+                            <br></br>
+                            <a href="\login">Log In?</a>
+             
+                        </form> 
+                    </div>
 
-       </div>
-        <div class="col-md-8 banner-sec">
-        <img class="d-block img-fluid" src="https://www.motosha.com/files/preview/1280x853/6173-yellow-dandelion-flower-dark-edit.jpg" width="8000" height="9000" alt="First slide"/>
-  
-        <h2 class="centered">Welcome to Enlivened!</h2>
-        <p class="paragraph">A place where you can find your social community, encourage one another, build confidence, create and attend activities of your choice.</p>
-
-      
-    
-
-            
-        </div>
-</div>
-</div> 
-
-</section>
+                    <div className="col-md-8 banner-sec">
+                        <img className="d-block img-fluid" src="https://www.motosha.com/files/preview/1280x853/6173-yellow-dandelion-flower-dark-edit.jpg" height="100%" alt=""/>
+                
+                        <h2 className="centered">Welcome to Enlivened!</h2>
+                        <p className="paragraph">A place where you can find your social community, encourage one another, build confidence, create and attend activities of your choice.</p>     
+                    </div>
+                </div>
+            </div> 
+        </section>
 
     );
 }

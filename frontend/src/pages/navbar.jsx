@@ -22,7 +22,7 @@ const Navbar = (currentPage) => {
                         <a class="nav-link" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/settings">Settings</a>
+                        <a class="nav-link mx-2" href="/settings">Settings</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/login">Logout</a>

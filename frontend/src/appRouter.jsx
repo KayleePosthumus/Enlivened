@@ -10,10 +10,11 @@ const AppRouter = () => {
         <div>
             <Router>
                 <Routes>
-                    <Route path="/" element={<Home />} />
+                    <Route path="/" element={<Login />} />
+                    <Route path="/home" element={<Home/>} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Signup />} />
-                    <Route path="/event" element={<Event />} />
+                    <Route path="/event/:id" element={<Event />} />
                 </Routes>
             </Router>
         </div>
