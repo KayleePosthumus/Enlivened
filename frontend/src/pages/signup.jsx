@@ -124,7 +124,7 @@ const Signup = () => {
                     </div>
 
                     <div className="col-md-8 banner-sec">
-                        <img className="d-block img-fluid" src="https://www.motosha.com/files/preview/1280x853/6173-yellow-dandelion-flower-dark-edit.jpg" height="100%" alt=""/>
+                        <img className="d-block img-fluid" id="login-img" src="https://www.motosha.com/files/preview/1280x853/6173-yellow-dandelion-flower-dark-edit.jpg" height="100%" alt=""/>
                 
                         <h2 className="centered">Welcome to Enlivened!</h2>
                         <p className="paragraph">A place where you can find your social community, encourage one another, build confidence, create and attend activities of your choice.</p>     

@@ -49,7 +49,7 @@ const Login = () => {
 
            </div>
             <div class="col-md-7 banner-sec">
-            <img class="d-block img-fluid" src="https://images.pexels.com/photos/1572036/pexels-photo-1572036.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" height="100%" alt=""/>
+            <img class="d-block img-fluid" id="login-img" src="https://images.pexels.com/photos/1572036/pexels-photo-1572036.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" height="100%" alt=""/>
       
             <h2 class="centered">Welcome to Enlivened!</h2>
             <p class="paragraph">A place where you can find your social community, encourage one another, build confidence, create and attend activities.</p>   
