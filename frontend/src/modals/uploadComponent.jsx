@@ -1,17 +1,20 @@
 import React from 'react';
+import {Modal} from 'react-bootstrap';
 
-const UploadComponent = () => {
+const UploadComponent = ({setShow}) => {
     return (
-        <div class="card text-center">
-            <div class="card-body">
-                <h5 class="card-title">Upload Images</h5>
-                <input id="upload" type="file" onchange="readURL(this);" class="form-control border-0"/>
-                <div class="input-group-append">
-                    <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
-                    <button type="button" class="btn btn-primary" style="margin-top: 10px;" data-bs-dismiss="modal" onclick="open_win()">Submit</button>
-                </div>   
+        <Modal show={true} onHide={()=>{setShow(false)}}>
+            <Modal.Header closeButton></Modal.Header>
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title mb-2">Upload Images</h5>
+                    <input id="upload" type="file" onChange="readURL(this);" class="form-control border-0"/>
+                    <div class="input-group-append mt-3">
+                        <button type="button" class="btn btn-primary text-white mx-1" onClick={()=>{setShow(false)}}>Submit</button>
+                    </div>   
+                </div>
             </div>
-        </div>
+        </Modal>
     );
 }
 

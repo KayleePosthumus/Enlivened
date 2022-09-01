@@ -3,11 +3,14 @@ import { Map, Marker } from "pigeon-maps"
 import Navbar from './navbar';
 import { useNavigate } from "react-router-dom";
 import EventComponent from '../modals/eventComponent';
+import { osm } from 'pigeon-maps/providers'
 
 const Home = () => {     
     
     const [markers,setMarkers] = useState(undefined);
     const [showEventComp,setShowEventComp] = useState(false);
+    const [lat,setLat] = useState(11.2);
+    const [long,setLong] = useState(11.2);
     const navigate = useNavigate();
 
     useEffect(() =>{
@@ -27,7 +30,7 @@ const Home = () => {
         <div className="bg-light">
             <Navbar/>
 
-            <Map height={500} defaultCenter={[11,11]} defaultZoom={5}>
+            <Map height={500} defaultCenter={[11,11]} defaultZoom={5} provider={osm} onClick={(e)=>{setLat(e.latLng[0]); setLong(e.latLng[1]); setShowEventComp(true);}}>
                   
                 {(typeof markers === 'undefined') ? (
                     <h5 className="mt-5"> LOADING ...</h5>
@@ -42,10 +45,14 @@ const Home = () => {
 
 
                 {/*onClick={() => navigate("/event")} */}
-                <button class="btn btn-dark w-75 py-2" onClick={() => {setShowEventComp(!showEventComp);}}> Create Event</button>
+                <button class="btn btn-dark w-75 py-2 mt-2" onClick={() => {setShowEventComp(!showEventComp);}}> Create Event</button>
 
 
-            {/* <EventComponent show={showEventComp} /> */}
+             { showEventComp? (
+              <EventComponent setShow={setShowEventComp} lat={lat} long={long}/>
+             ):(
+              <div></div>
+             )}
             
         </div>
       );

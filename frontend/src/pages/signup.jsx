@@ -3,7 +3,7 @@ import Axios from 'axios';
 import { BiLockOpenAlt,BiLockAlt } from "react-icons/bi";
 import { MdOutlineMailOutline,MdTitle } from "react-icons/md";
 import Navbar from './navbar';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const Signup = () => {
@@ -13,20 +13,21 @@ const Signup = () => {
     const [userConfPass, setUserConfPass] = useState("");
     const [userName, setUserName] = useState("");
     const [errorMessage, updateErrorMessage] = useState([]);
+    const navigate = useNavigate();
 
     const signUp = (e) =>{
 
-        // const requestOptions = {
-        // method: 'POST',
-        // body: JSON.stringify({"FirstName":userName, "Email":userEmail,"Password":userPass})
-        // };
-        // fetch("http://197.245.137.83:8728/user/register",requestOptions).then(
-        // response => response.json()
-        // ).then(
-        // data =>
-        // console.log(data)
-        // );
-        Navigate("\login");
+        const requestOptions = {
+        method: 'POST',
+        body: JSON.stringify({"FirstName":userName, "Email":userEmail,"Password":userPass})
+        };
+        fetch("http://197.245.137.83:8728/user/register",requestOptions).then(
+        response => response.json()
+        ).then(
+        data =>
+        console.log(data)
+        );
+        navigate("/login");
         
     }
     
@@ -47,7 +48,7 @@ const Signup = () => {
                             )}
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1" className="text-uppercase mb-2">Username</label>
+                                <label for="exampleInputEmail1" className="text-uppercase mb-2">Name</label>
                                 <input type="text" className="form-control mb-3" placeholder="" onChange = {(e) => {
                                                         setUserName(e.target.value)
                                                     }} required/>
@@ -79,9 +80,10 @@ const Signup = () => {
                             <div className="form-group">
                                 <label for="exampleInputPassword1" className="text-uppercase mb-2">Password</label>
                                 <input type="password" className="form-control mb-3" placeholder="" onChange = {(e) => {
-                                    var uPass = e.target.value;
 
-                                    if(!errorMessage.includes("Passwords do not match") && uPass !== userConfPass){
+                                    setUserPass(e.target.value);
+
+                                    if(userPass !== userConfPass){
 
                                         if(!errorMessage.includes("Passwords do not match")){
                                         updateErrorMessage([...errorMessage, "Passwords do not match"]);
@@ -89,7 +91,6 @@ const Signup = () => {
 
                                     }else{
                                         updateErrorMessage(errorMessage.filter(item => item !== "Passwords do not match"));
-                                        setUserPass(uPass);
                                     }
 
                                 }} required/>
@@ -99,9 +100,9 @@ const Signup = () => {
                             <div className="form-group">
                                 <label for="exampleInputPassword1" className="text-uppercase mb-2">Confirm Password</label>
                                 <input type="password" className="form-control " placeholder="" onChange = {(e) => {
-                                    var cPass = e.target.value;
+                                    setUserConfPass(e.target.value);
 
-                                    if(!errorMessage.includes("Passwords do not match") && userPass !== cPass){
+                                    if(userConfPass !== userPass){
 
                                         if(!errorMessage.includes("Passwords do not match")){
                                         updateErrorMessage([...errorMessage, "Passwords do not match"]);
@@ -109,7 +110,6 @@ const Signup = () => {
 
                                     }else{
                                         updateErrorMessage(errorMessage.filter(item => item !== "Passwords do not match"));
-                                        setUserConfPass(cPass);
                                     }
 
                                 }} required/>

@@ -5,10 +5,12 @@ import {ImTrophy} from 'react-icons/im';
 import {BiCategory} from 'react-icons/bi';
 import {BsCalendarDateFill,BsFillPeopleFill} from 'react-icons/bs';
 import Navbar from './navbar';
+import UploadComponent from '../modals/uploadComponent';
 
 const Event = () => {
     const {id} = useParams();
     const [event,setEvent] = useState(undefined);
+    const [showUpload,setShowUpload] = useState(false);
 
     useEffect(() =>{
         const requestOptions = {
@@ -62,7 +64,16 @@ const Event = () => {
                             <p>{event.capacity}</p>
                         </div>
                     </div>
-            </div>
+
+                    <button className='w-75 btn btn-dark rounded px-3 py-2 text-center mt-3' onClick={()=>{setShowUpload(true)} }>Upload Images</button>
+
+
+                    { showUpload? (
+                    <UploadComponent setShow={setShowUpload}/>
+                    ):(
+                    <div></div>
+                    )}
+                    </div>
             )}
             
         </div>

@@ -1,14 +1,15 @@
 import React,{useState} from 'react';
 import '../style.css';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
   const [email,setEmail] = useState(undefined);
   const [pass,setPass] = useState(undefined);
+  const navigate = useNavigate();
 
-  const signIn = (e) =>{
-    Navigate("/home")
+  const signIn = () =>{
+    navigate("/home");
   }
 
     return (
@@ -22,7 +23,7 @@ const Login = () => {
                 <h2 className="text-center">Login</h2>
   <form classMame="login-form" action={signIn}>
       <div className="form-group">
-        <label for="exampleInputEmail1" className="text-uppercase mb-2" onChange={(e)=>{ setEmail(e.target.value) }}>Username</label>
+        <label for="exampleInputEmail1" className="text-uppercase mb-2" onChange={(e)=>{ setEmail(e.target.value) }}>Email</label>
         <input type="text" className="form-control mb-3" placeholder=""/>
         
       </div>
@@ -39,7 +40,7 @@ const Login = () => {
         </label>
         <br></br>
         <br/>
-        <button type="submit" className="btn-login float-right" onClick={signIn}>Submit</button>
+        <button type="submit" className="btn-login float-right" onClick={()=>signIn()}>Submit</button>
         <br></br>
         <a href="\signUp">Sign Up?</a>
       </div>
