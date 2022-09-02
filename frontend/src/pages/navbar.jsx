@@ -9,7 +9,7 @@ const Navbar = () => {
 
             <div class="container-fluid">
                 <div className="d-flex">
-                    <a class="brand">
+                    <a class="navbar-brand">
                         <img src={logo} alt="" width="130"/>
                     </a>
                 </div>

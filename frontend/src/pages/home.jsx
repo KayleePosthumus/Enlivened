@@ -30,18 +30,21 @@ const Home = () => {
         <div className="bg-light">
             <Navbar/>
 
-            <Map height={500} defaultCenter={[11,11]} defaultZoom={5} provider={osm} onClick={(e)=>{setLat(e.latLng[0]); setLong(e.latLng[1]); setShowEventComp(true);}}>
+            <Map height={500} defaultCenter={[11,11]} defaultZoom={6} provider={osm} onClick={(e)=>{setLat(e.latLng[0]); setLong(e.latLng[1]); setShowEventComp(true);}}>
                   
                 {(typeof markers === 'undefined') ? (
                     <h5 className="mt-5"> LOADING ...</h5>
                 ) : (
                     markers.map((event, i) => (
-                      <Marker width={50} anchor={[parseInt(event.longitude),parseInt(event.latitude)]} onClick={()=>{ navigate("/event/"+event.id);}}
+                      <Marker width={50} anchor={[parseFloat(event.longitude),parseFloat(event.latitude)]} onClick={()=>{ navigate("/event/"+event.id);}}
                       />
                     ))
                     ) 
                     }  
+
                 </Map>
+
+                
 
 
                 {/*onClick={() => navigate("/event")} */}
